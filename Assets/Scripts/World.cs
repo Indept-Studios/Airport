@@ -35,23 +35,5 @@ public class World
         }
         return tiles[x, y];
     }
-
-    public void RandomizeTiles()
-    {
-        for (int x = 0; x < Width; x++)
-        {
-            for (int y = 0; y < Height; y++)
-            {
-                if (Random.Range(0, 2) == 0)
-                {
-                    tiles[x, y].Type = Tile.TileType.Gras;
-                }
-                else
-                {
-                    tiles[x, y].Type = Tile.TileType.Empty;
-                }
-            }
-        }
-    }
 }
 

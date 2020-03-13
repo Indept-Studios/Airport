@@ -1,0 +1,9 @@
+﻿
+
+Beim Zoom eventuell Z der Camara statt FoV verändern?
+
+WorldManager "OnTileTypeChanged" auf alle TileType im "Tile Enum" erweitern und abstrahieren
+
+Mehr sprites zum Testen
+
+
