@@ -4,14 +4,20 @@ using UnityEngine;
 using System;
 
 public class WorldManager : MonoBehaviour
-{
-    public Sprite grasSprite;
+{    
+    public static WorldManager Instance { get; protected set; }
+    public World World { get; protected set; }
 
-    World world;
+    public Sprite grasSprite;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (Instance!=null)
+        {
+            Debug.LogError("There should never be two world controllers.");
+        }
+        Instance = this;
         InstantiateNewWorld();
     }
 
@@ -23,17 +29,18 @@ public class WorldManager : MonoBehaviour
 
     public void InstantiateNewWorld()
     {
-        world = new World(100, 100);
+        World = new World(100, 100);
 
-        for (int x = 0; x < world.Width; x++)
+        for (int x = 0; x < World.Width; x++)
         {
-            for (int y = 0; y < world.Height; y++)
+            for (int y = 0; y < World.Height; y++)
             {
-                Tile tile_data = world.GetTileAt(x, y);
+                Tile tile_data = World.GetTileAt(x, y);
                 GameObject tile_go = new GameObject();
 
                 tile_go.name = "Tile_" + x + "_" + y;
                 tile_go.transform.position = new Vector3(tile_data.X, tile_data.Y, 0);
+                tile_go.transform.SetParent(this.transform, true);
                 tile_go.AddComponent<SpriteRenderer>();
                 OnTileTypeChanged(tile_data, tile_go);
                 tile_data.RegisterTileTypeChangedCallback((tile) => { OnTileTypeChanged(tile, tile_go); });

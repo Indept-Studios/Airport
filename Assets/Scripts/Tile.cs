@@ -8,7 +8,7 @@ public class Tile
     public enum TileType { Gras, Asphalt, Concret, Floor, Empty }
 
     // Initial Tile set
-    TileType type = TileType.Gras;
+    TileType _type = TileType.Gras;
 
     Action<Tile> cbTileTypeChanged;
 
@@ -21,11 +21,12 @@ public class Tile
 
     public TileType Type
     {
-        get { return type; }
+        get { return _type; }
         set
         {
-            type = value;
-            if (cbTileTypeChanged != null)
+            TileType oldtype = _type;
+            _type = value;
+            if (cbTileTypeChanged != null && oldtype !=_type)
             {
                 cbTileTypeChanged(this);
             }
