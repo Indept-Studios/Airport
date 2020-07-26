@@ -48,7 +48,7 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    void OnTileTypeChanged(Tile tile_data, GameObject tile_go)
+    public void OnTileTypeChanged(Tile tile_data, GameObject tile_go)
     {
         if (tile_data.Type == Tile.TileType.Gras)
         {
@@ -62,5 +62,13 @@ public class WorldManager : MonoBehaviour
         {
             Debug.LogError("OnTileTypeChanged - Unrecognized tile Type.");
         }
+    }
+
+    public Tile GetTileAtWorldCoord(Vector3 coord)
+    {
+        int x = Mathf.FloorToInt(coord.x);
+        int y = Mathf.FloorToInt(coord.y);
+
+        return WorldManager.Instance.World.GetTileAt(x, y);
     }
 }
